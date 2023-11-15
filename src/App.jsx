@@ -144,11 +144,29 @@ function App() {
     }
   },[])
 
+  const handleSave = () => {
+    // Check if the editor instance exists before attempting to save
+    if (editorInstance.current) {
+      editorInstance.current
+        .save()
+        .then((outputData) => {
+          console.log('Article data: ', outputData);
+        })
+        .catch((error) => {
+          console.log('Saving failed: ', error);
+        });
+    } else {
+      console.error('Editor instance not available');
+    }
+  };
+
+
   return (
     <div className='bg-white w-auto h-[100vh] text-black mt-9'>
     <div id="editorjs">
 
     </div>
+    <button onClick={handleSave}>Save</button>
     </div>
   )
 }
